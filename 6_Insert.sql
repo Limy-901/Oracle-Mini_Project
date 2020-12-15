@@ -45,10 +45,10 @@ insert into setting values('JUN','hd','1','KOREAN','4G',0);
 insert into setting values('JONNY','fullhd','0','ENGLISH','wifi',1);
 
 -- 회원관리
-insert into memmgr values('JINNY',0,0);
-insert into memmgr values('JINNY',0,0);
-insert into memmgr values('JINNY',0,0);
-insert into memmgr values('JINNY',0,0);
+insert into memmgr values('JINNY',0,1);
+insert into memmgr values('CANDY',1,1);
+insert into memmgr values('JUN',1,0);
+insert into memmgr values('JONNY',0,1);
 
 -- 마이페이지
 insert into MYPAGE values ('JINNY', '무간도', (select V_CODE from STREAMING where ID='JINNY'), 'MOVIE-00175', '0', '어바웃 타임', 'A');
