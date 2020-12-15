@@ -96,7 +96,7 @@ CREATE TABLE QNABD(
 create sequence QNABD_SEQ increment by 1 start with 1 nocache;
 --관리자
 CREATE TABLE MANAGE(
-	MONTH varchar2(10),
+	MONTH DATE,
 	MONTH_SALES NUMBER(20)
 );
 --이벤트 트리거 사용하기 
@@ -147,22 +147,3 @@ INSERT INTO MEMBER VALUES('JINNY','12345','SNID@NAVER.COM','1999.01.01','2020.02
 INSERT INTO MEMBER VALUES('CANDY','54321','HO@NAVER.COM','2000.01.02','2020.03.15','PRE-000002','RE-02');
 INSERT INTO MEMBER VALUES('JUN','45678','DO@NAVER.COM','2001.01.03','2018.03.15','PRE-000003','RE-03');
 INSERT INTO MEMBER VALUES('JONNY','87654','RO@NAVER.COM','2002.01.04','2015.01.30','PRE-000004','RE-04');
-
---매니지 인설트
-insert into MANAGE values(to_char(SYSDATE, 'YY-MM'),100000);
-insert into MANAGE values(to_char((SYSDATE-31), 'YY-MM'),200000);
-insert into MANAGE values(to_char((SYSDATE-365), 'YY-MM'),300000);
-
---질문게시판
-insert into QNABD values(QNABD_SEQ.nextval,'JINNY','질문있습니다','회원 탈퇴는 어떻게 하는건가요? 잘 안되네요.',sysdate,0);
-insert into QNABD values(QNABD_SEQ.nextval,'CANDY','영화 넘 없어요','돈 아까운데 언제 추가해주시나여?',sysdate,0);
-insert into QNABD values(QNABD_SEQ.nextval,'JUN','다큐도 나오나요?','기대돼요!!',sysdate,1);
-insert into QNABD values(QNABD_SEQ.nextval,'JONNY','저작권','저작권 문제를 조십하십셔......',sysdate,1);
-
---알림소식
-insert into NOTICE values('20-12 공지사항', '어바웃 타임이 새로 나왔습니다!', '친구 추천 이벤트');
-insert into NOTICE values('20-12 업데이트', '우리 귀여운 월-E 등장~', '친구 추천 이벤트, 두번째!');
-
---이벤트
-insert into EVENT values('PRO-001', 'CANDY', (select REMPER_CODE from member where id='CANDY'), 'JINNY'); --캔디가 지니를 데려옴
-insert into EVENT values('PRO-002', 'JONNY', (select REMPER_CODE from member where id='JONNY'), 'JUN');--조니가 준을 데려옴
