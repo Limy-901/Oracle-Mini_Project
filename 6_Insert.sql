@@ -14,23 +14,17 @@ insert into GENRE values(55,'스릴러');
 insert into GENRE values(56,'액션');
 insert into GENRE values(57,'드라마');
 
--- 스트리밍
-insert into STREAMING values((select V_CODE from VID where V_NAME='월-E'),'JINNY','2019-03-20',50);
-insert into STREAMING values((select V_CODE from VID where V_NAME='행복을 찾아서'),'CANDY','2020-05-14',32);
-insert into STREAMING values((select V_CODE from VID where V_NAME='어바웃 타임'),'JUN','2020-10-19',121);
-insert into STREAMING values((select V_CODE from VID where V_NAME='그 시절 우리가 좋아했던 소녀'),'JINNY','2020-12-25',86);
-
 -- 작품
 insert into VID values(vid_SEQ.nextval,'어바웃 타임','리차드 커티스','영국','레이첼 맥아담스','2013/12/05',10,52);
 insert into VID values(vid_SEQ.nextval,'행복을 찾아서','가브리엘 무치노','미국','윌 스미스','2007/02/28',10,57);
 insert into VID values(vid_SEQ.nextval,'그 시절 우리가 좋아했던 소녀','구파도','대만','가진동,션자이','2012/08/22',10,52);
 insert into VID values(vid_SEQ.nextval,'월-E','앤드류 스탠튼','미국','월-E','2008/08/06',10,51);
 
--- 리뷰
-insert into REVIEW values((select V_CODE from VID where V_NAME='어바웃 타임'),'계속 보게됨, 배우가 예쁨',4.6,'JINNY');
-insert into REVIEW values((select V_CODE from VID where V_NAME='월-E'),'저렇게 순수할 수 있을까',5,'CANDY');
-insert into REVIEW values((select V_CODE from VID where V_NAME='행복을 찾아서'),'정말 감동적이에요.. 추천',5,'JUN');
-insert into REVIEW values((select V_CODE from VID where V_NAME='그 시절 우리가 좋아했던 소녀'),'부럽다, 웰컴 크리스마스',5,'JONNY');
+-- 회원
+INSERT INTO MEMBER VALUES('JINNY','wda123','SNID@NAVER.COM','1999.01.01','2020.02.15','RE-01');
+INSERT INTO MEMBER VALUES('CANDY','gf2123','HO@NAVER.COM','2000.01.02','2020.03.15','RE-02');
+INSERT INTO MEMBER VALUES('JUN','ge9293','DO@NAVER.COM','2001.01.03','2018.03.15','RE-03');
+INSERT INTO MEMBER VALUES('JONNY','jonny3','RO@NAVER.COM','2002.01.04','2015.01.30','RE-04');
 
 -- 결제
 insert into pay values('JINNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
@@ -56,11 +50,18 @@ insert into MYPAGE values ('CANDY', '테넷', (select V_CODE from STREAMING wher
 insert into MYPAGE values ('JUN', '조제', (select V_CODE from STREAMING where ID='JUN'), 'DRAMA-00125', '1', '그 시절 우리가 좋아했던 소녀', 'A');
 insert into MYPAGE values ('JONNY', '더 문', (select V_CODE from STREAMING where ID='JONNY'), 'MOVIE-00105', '0', '행복을 찾아서', 'B');
 
--- 회원
-INSERT INTO MEMBER VALUES('JINNY','wda123','SNID@NAVER.COM','1999.01.01','2020.02.15','PRE-000001','RE-01');
-INSERT INTO MEMBER VALUES('CANDY','gf2123','HO@NAVER.COM','2000.01.02','2020.03.15','PRE-000002','RE-02');
-INSERT INTO MEMBER VALUES('JUN','ge9293','DO@NAVER.COM','2001.01.03','2018.03.15','PRE-000003','RE-03');
-INSERT INTO MEMBER VALUES('JONNY','jonny3','RO@NAVER.COM','2002.01.04','2015.01.30','PRE-000004','RE-04');
+
+-- 스트리밍
+insert into STREAMING values((select V_CODE from VID where V_NAME='월-E'),'JINNY','2019-03-20',50);
+insert into STREAMING values((select V_CODE from VID where V_NAME='행복을 찾아서'),'CANDY','2020-05-14',32);
+insert into STREAMING values((select V_CODE from VID where V_NAME='어바웃 타임'),'JUN','2020-10-19',121);
+insert into STREAMING values((select V_CODE from VID where V_NAME='그 시절 우리가 좋아했던 소녀'),'JINNY','2020-12-25',86);
+
+-- 리뷰
+insert into REVIEW values((select V_CODE from VID where V_NAME='어바웃 타임'),'계속 보게됨, 배우가 예쁨',4.6,'JINNY');
+insert into REVIEW values((select V_CODE from VID where V_NAME='월-E'),'저렇게 순수할 수 있을까',5,'CANDY');
+insert into REVIEW values((select V_CODE from VID where V_NAME='행복을 찾아서'),'정말 감동적이에요.. 추천',5,'JUN');
+insert into REVIEW values((select V_CODE from VID where V_NAME='그 시절 우리가 좋아했던 소녀'),'부럽다, 웰컴 크리스마스',5,'JONNY');
 
 -- 관리
 insert into MANAGE values(to_char(SYSDATE, 'YY-MM'),100000);
@@ -78,5 +79,5 @@ insert into NOTICE values('20-12 공지사항', '어바웃 타임이 새로 나�
 insert into NOTICE values('20-12 업데이트', '우리 귀여운 월-E 등장~', '친구 추천 이벤트, 두번째!');
 
 -- 이벤트
-insert into EVENT values('PRO-001', 'CANDY', (select REMPER_CODE from member where id='CANDY'), 'JINNY'); --캔디가 지니를 데려옴
-insert into EVENT values('PRO-002', 'JONNY', (select REMPER_CODE from member where id='JONNY'), 'JUN');--조니가 준을 데려옴
+insert into EVENT values('PRO-001', 'CANDY', (select REMPER_CODE from member where id='CANDY'), 'JINNY'); 
+insert into EVENT values('PRO-002', 'JONNY', (select REMPER_CODE from member where id='JONNY'), 'JUN');

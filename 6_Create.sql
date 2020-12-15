@@ -22,24 +22,7 @@ create table VID(
 	J_CODE number(2) constraint VID_J_FK references SUBJECT(J_CODE), -- 주제코드(FK)
 	G_CODE number(2) constraint VID_G_FK references GENRE(G_CODE)    -- 장르코드(FK)
 );
-create sequence VID_SEQ increment by 1 start with 1 nocache;             -- 시퀀스생성
-
--- 리뷰
-create table REVIEW(
-	V_CODE number constraint REVIEW_PK references VID(V_CODE), -- 작품코드(PK)
-	V_REVIEW varchar2(1000),                                   -- 리뷰내용
-	V_GRADE number(2),                                         -- 별점
-	ID varchar2(15) constraint REVIEW_FK references MEMBER(ID) -- 아이디(FK)
-);
-
--- 스트리밍
-create table STREAMING(
-	V_CODE number references VID(V_CODE),      -- 작품코드(PK)
-	ID varchar2(15) references MEMBER(ID),     -- 아이디(PK)
-	V_DATE date,                               -- 시청일
-	V_CONTINUE number(3)                       -- 이어보기시점
-);
-alter table STREAMING add constraint STREAMING_PK primary key(V_CODE,ID);
+create sequence VID_SEQ increment by 1 start with 1 nocache;
 
 -- 회원
 create TABLE MEMBER(
@@ -79,13 +62,31 @@ create table MEMMGR (
 -- 마이페이지
 create table MYPAGE (
 	ID varchar2(15) constraint MYPAGE_ID_FK references MEMBER(ID),   -- ID(FK)
-	VID_REQUEST varchar2(20),                                        -- 영상요청
-	HISTORY varchar2(16),                                            -- 최근기록
-	DOWNLOAD varchar2(20),                                           -- 다운로드
+	VID_REQUEST varchar2(30),                                        -- 영상요청
+	HISTORY varchar2(30),                                            -- 최근기록
+	DOWNLOAD varchar2(30),                                           -- 다운로드
 	SERVICE varchar2(30),                                            -- 고객센터
-	HEART_LIST varchar2(20),                                         -- 찜목록
+	HEART_LIST varchar2(30),                                         -- 찜목록
 	COMMUNITY varchar2(30)                                           -- 읏챠커뮤니티참여
 );
+
+-- 리뷰
+create table REVIEW(
+	V_CODE number constraint REVIEW_PK references VID(V_CODE), -- 작품코드(PK)
+	V_REVIEW varchar2(1000),                                   -- 리뷰내용
+	V_GRADE number(2),                                         -- 별점
+	ID varchar2(15) constraint REVIEW_FK references MEMBER(ID) -- 아이디(FK)
+);
+
+-- 스트리밍
+create table STREAMING(
+	V_CODE number references VID(V_CODE),      -- 작품코드(PK)
+	ID varchar2(15) references MEMBER(ID),     -- 아이디(PK)
+	V_DATE date,                               -- 시청일
+	V_CONTINUE number(3)                       -- 이어보기시점
+);
+alter table STREAMING add constraint STREAMING_PK primary key(V_CODE,ID);
+
 -- 알림소식
 create table NOTICE(
 	NEW_NOTICE varchar2(30) constraint NOTICE_PK primary key,       -- 공지사항
@@ -101,7 +102,7 @@ create table QNABD(
 	QNA_DATE date,                                                  -- 날짜
 	QNA_COMPLETE number(2)                                          -- 답변여부
 );
-create sequence QNABD_SEQ increment by 1 start with 1 nocache;          -- 시퀀스생성
+create sequence QNABD_SEQ increment by 1 start with 1 nocache;
 
 -- 관리자
 create table MANAGE( 
