@@ -1,0 +1,149 @@
+--주제
+create table SUBJECT(
+	J_CODE number(2) constraint SUB_PK primary key,
+	J_NAME varchar2(30) constraint SUB_CK
+	check(J_NAME in('영화','드라마','다큐','예능'))
+)
+--장르
+create table GENRE(
+	G_CODE number(2) constraint GENRE_PK primary key,
+	G_NAME varchar2(30)
+)
+--작품코드 시퀀스
+create table VID(
+	V_CODE number constraint VID_PK primary key,
+	V_NAME varchar2(30),
+	DIR_NAME varchar2(15),
+	COU_NAME varchar2(20),
+	ACTOR_NAME varchar2(15),
+	RELEASE_DATE date,
+	J_CODE number(2) constraint VID_J_FK references SUBJECT(J_CODE),
+	G_CODE number(2) constraint VID_G_FK references GENRE(G_CODE)
+)
+create sequence VID_SEQ increment by 1 start with 1 nocache;
+--리뷰
+create table REVIEW(
+	V_CODE number constraint REVIEW_PK references VID(V_CODE),
+	V_REVIEW varchar2(1000),
+	V_GRADE number(2),
+	ID varchar2(15) constraint REVIEW_FK references MEMBER(ID)
+)
+--스트리밍
+create table STREAMING(
+	V_CODE number references VID(V_CODE),
+	ID varchar2(15) references MEMBER(ID),
+	V_DATE date,
+	V_CONTINUE number(3)
+)
+alter table STREAMING add constraint STREAMING_PK primary key(V_CODE,ID);
+
+--회원
+create TABLE MEMBER(
+	ID VARCHAR2(10) constraint MEM_PK primary key,
+	PWD VARCHAR2(20),
+	EMAIL VARCHAR2(30),
+	BIRTH VARCHAR2(26),
+	PAYDAY DATE,
+	REMPER_CODE VARCHAR2(10)
+)
+--결제
+create table PAY(
+	ID varchar2(10) constraint PAY_PK primary key references MEMBER(ID),
+	P_INFOM NUMBER(2),
+	P_DATE DATE,
+	P_END DATE
+)
+--설정
+create table SETTING (
+	ID varchar2(15) constraint SETTING_ID_FK references MEMBER(ID),
+	QUALITY varchar2(10),
+	SUBTITLE varchar2(10),
+	DUBBING varchar2(10),
+	WIFI varchar2(10),
+	ABROAD NUMBER(1)
+)
+--회원관리
+create table MEMMGR (
+	ID varchar2(15) constraint MEMMGR_ID_FK references MEMBER(ID),
+	SO_LOGIN NUMBER(1),
+	CERTIFY NUMBER(1)
+)
+--마이페이지
+create table MYPAGE (
+	ID varchar2(15) constraint MYPAGE_ID_FK references MEMBER(ID),
+	VID_REQUEST varchar2(20),
+	HISTORY varchar2(16),
+	DOWNLOAD varchar2(20),
+	SERVICE varchar2(30),
+	HEART_LIST varchar2(20),
+	COMMUNITY varchar2(30)
+)
+--알림소식
+CREATE TABLE NOTICE(
+	NEW_NOTICE VARCHAR2(30) CONSTRAINT NOTICE_PK PRIMARY KEY,
+	NEW_RECOM VARCHAR2(30),
+	NEW_EVENT VARCHAR2(30)
+);
+--질문게시판 시퀀스
+CREATE TABLE QNABD(
+	QNA_IDX NUMBER CONSTRAINT QNA_PK PRIMARY KEY,
+	ID VARCHAR2(15) CONSTRAINT ID_FK REFERENCES MEMBER(ID),
+	QNA_TITLE VARCHAR2(30),
+	QNA_POST VARCHAR2(1000),
+	QNA_DATE DATE,
+	QNA_COMPLETE NUMBER(2)
+);
+create sequence QNABD_SEQ increment by 1 start with 1 nocache;
+--관리자
+CREATE TABLE MANAGE(
+	MONTH DATE,
+	MONTH_SALES NUMBER(20)
+);
+--이벤트 트리거 사용하기 
+CREATE TABLE EVENT(
+	DCT_CODE VARCHAR2(10),
+	DCT_FRND VARCHAR2(10),
+	REMPER_CODE VARCHAR2(10),
+	ID VARCHAR2(15)
+);
+
+
+----------------------------
+insert into SUBJECT values(10,'영화');
+insert into SUBJECT values(20,'드라마');
+insert into SUBJECT values(30,'다큐');
+insert into SUBJECT values(40,'예능');
+
+insert into GENRE values(51,'판타지');
+insert into GENRE values(52,'멜로');
+insert into GENRE values(53,'코믹');
+insert into GENRE values(54,'공포');
+insert into GENRE values(55,'스릴러');
+insert into GENRE values(56,'액션');
+insert into GENRE values(57,'드라마');
+
+insert into STREAMING values((select V_CODE from VID where V_NAME='월-E'),'JINNY',sysdate,126);
+insert into STREAMING values((select V_CODE from VID where V_NAME='행복을 찾아서'),'CANDY',sysdate,126);
+insert into STREAMING values((select V_CODE from VID where V_NAME='어바웃 타임'),'JUN',sysdate,126);
+
+insert into VID values(vid_SEQ.nextval,'어바웃 타임','리차드 커티스','영국','레이첼 맥아담스','2013/12/05',10,52);
+insert into VID values(vid_SEQ.nextval,'행복을 찾아서','가브리엘 무치노','미국','윌 스미스','2007/02/28',10,57);
+insert into VID values(vid_SEQ.nextval,'그 시절 우리가 좋아했던 소녀','구파도','대만','가진동,션자이','2012/08/22',10,52);
+insert into VID values(vid_SEQ.nextval,'월-E','앤드류 스탠튼','미국','월-E','2008/08/06',10,51);
+
+insert into REVIEW values((select V_CODE from VID where V_NAME='어바웃 타임'),'계속 보게됨, 배우가 예쁨',4.6,'JINNY');
+insert into REVIEW values((select V_CODE from VID where V_NAME='월-E'),'저렇게 순수할 수 있을까',5,'CANDY');
+
+insert into pay values('JINNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
+insert into pay values('CANDY',2,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),2));
+insert into pay values('JUN',3,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),3));
+insert into pay values('JONNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
+
+insert into setting values('JINNY','fullhd','0','english','wifi',0);
+insert into memmgr values('JINNY',0,0);
+insert into MYPAGE values ('JINNY', '무간도', 'movie-0001', 'drama-00175', 'Y', 'movie-00134', 'A');
+
+INSERT INTO MEMBER VALUES('JINNY','12345','SNID@NAVER.COM','1999.01.01','2020.02.15','PRE-000001','RE-01');
+INSERT INTO MEMBER VALUES('CANDY','54321','HO@NAVER.COM','2000.01.02','2020.03.15','PRE-000002','RE-02');
+INSERT INTO MEMBER VALUES('JUN','45678','DO@NAVER.COM','2001.01.03','2018.03.15','PRE-000003','RE-03');
+INSERT INTO MEMBER VALUES('JONNY','87654','RO@NAVER.COM','2002.01.04','2015.01.30','PRE-000004','RE-04');
