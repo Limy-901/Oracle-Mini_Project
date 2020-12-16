@@ -150,3 +150,15 @@ begin
 	values(:new.V_NAME||'이 새로 나왔습니다.');
 end;
 /
+
+-- 이벤트 참여시, 추천인 계정에 프리미엄 30일 추가 트리거
+create or replace trigger TRI_EVENT
+after
+	insert on event
+	for each row
+begin
+	update PAY
+	set P_END=P_END+30
+	where ID=:new.DCT_FRND;
+end;
+/
