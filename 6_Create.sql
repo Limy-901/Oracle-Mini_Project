@@ -45,18 +45,18 @@ create table PAY(
 -- 설정
 create table SETTING (
 	ID varchar2(15) constraint SETTING_ID_FK references MEMBER(ID),  -- ID(FK)
-	QUALITY varchar2(10),                                            -- 화질
-	SUBTITLE varchar2(10),                                           -- 자막
-	DUBBING varchar2(10),                                            -- 더빙
-	WIFI varchar2(10),                                               -- 접속방식
-	ABROAD NUMBER(1)                                                 -- 해외접속
+	QUALITY varchar2(10),                                            -- 화질[FullHD,HD]
+	SUBTITLE varchar2(10),                                           -- 자막[0,1]
+	DUBBING varchar2(10),                                            -- 더빙[0,1]
+	WIFI varchar2(10),                                               -- 접속방식[data,wifi]
+	ABROAD NUMBER(1)                                                 -- 해외접속[0,1]
 );
 
 -- 회원관리
 create table MEMMGR (
 	ID varchar2(15) constraint MEMMGR_ID_FK references MEMBER(ID),   -- ID(FK)
-	SO_LOGIN NUMBER(1),                                              -- 소셜로그인여부
-	CERTIFY NUMBER(1)                                                -- 이메일인증여부
+	SO_LOGIN NUMBER(1),                                              -- 소셜로그인여부[0,1]
+	CERTIFY NUMBER(1)                                                -- 이메일인증여부[0,1]
 );
 
 -- 마이페이지
