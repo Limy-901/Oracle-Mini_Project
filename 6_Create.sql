@@ -15,9 +15,9 @@ create table GENRE(
 create table VID(
 	V_CODE number constraint VID_PK primary key,                     -- 작품코드(시퀀스)(PK)
 	V_NAME varchar2(30),                                             -- 작품제목
-	DIR_NAME varchar2(15),                                           -- 감독명
-	COU_NAME varchar2(20),                                           -- 국가명
-	ACTOR_NAME varchar2(15),                                         -- 주연배우
+	DIR_NAME varchar2(30),                                           -- 감독명
+	COU_NAME varchar2(30),                                           -- 국가명
+	ACTOR_NAME varchar2(30),                                         -- 주연배우
 	RELEASE_DATE date,                                               -- 개봉일
 	J_CODE number(2) constraint VID_J_FK references SUBJECT(J_CODE), -- 주제코드(FK)
 	G_CODE number(2) constraint VID_G_FK references GENRE(G_CODE)    -- 장르코드(FK)
