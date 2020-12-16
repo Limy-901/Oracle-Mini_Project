@@ -32,11 +32,24 @@ insert into PAY values('CANDY',2,(select PAYDAY from member where id='CANDY'),AD
 insert into PAY values('JUN',3,(select PAYDAY from member where id='JUN'),ADD_MONTHS((select PAYDAY from member where id='JUN'),3));
 insert into PAY values('JONNY',1,(select PAYDAY from member where id='JONNY'),ADD_MONTHS((select PAYDAY from member where id='JONNY'),1));
 
+-- 셋팅
+insert into SETTING values('JINNY','fullhd','0','ENGLISH','wifi',1);
+insert into SETTING values('CANDY','hd','1','KOREAN','4G',0);
+insert into SETTING values('JUN','hd','1','KOREAN','4G',0);
+insert into SETTING values('JONNY','fullhd','0','ENGLISH','wifi',1);
+
+-- 회원관리
+insert into MEMMGR values('JINNY',0,1);
+insert into MEMMGR values('CANDY',1,1);
+insert into MEMMGR values('JUN',1,0);
+insert into MEMMGR values('JONNY',0,1);
+
 -- 마이페이지
 insert into MYPAGE values ('JINNY', '무간도', (select V_CODE from STREAMING where ID='JINNY'), 'MOVIE-00175', '0', '어바웃 타임', 'A');
 insert into MYPAGE values ('CANDY', '테넷', (select V_CODE from STREAMING where ID='CANDY'), 'DRAMA-00115', '1', '어바웃 타임', 'B');
 insert into MYPAGE values ('JUN', '조제', (select V_CODE from STREAMING where ID='JUN'), 'DRAMA-00125', '1', '그 시절 우리가 좋아했던 소녀', 'A');
 insert into MYPAGE values ('JONNY', '더 문', (select V_CODE from STREAMING where ID='JONNY'), 'MOVIE-00105', '0', '행복을 찾아서', 'B');
+
 
 -- 스트리밍
 insert into STREAMING values((select V_CODE from VID where V_NAME='월-E'),'JINNY','2019-03-20',50);
@@ -62,10 +75,8 @@ insert into QNABD values(QNABD_SEQ.nextval,'JUN','다큐도 나오나요?','기�
 insert into QNABD values(QNABD_SEQ.nextval,'JONNY','저작권','저작권 문제를 조십하십셔......','2020-11-13',1);
 
 -- 알림
-insert into NOTICE(NEW_NOTICE) values('20-12 공지사항');
-insert into NOTICE(NEW_EVENT) values('친구 추천 이벤트');
-insert into NOTICE(NEW_NOTICE) values('20-12 업데이트');
-insert into NOTICE(NEW_EVENT) values('친구 추천 이벤트, 두번째!');
+insert into NOTICE values('20-12 공지사항', '어바웃 타임이 새로 나왔습니다!', '친구 추천 이벤트');
+insert into NOTICE values('20-12 업데이트', '우리 귀여운 월-E 등장~', '친구 추천 이벤트, 두번째!');
 
 -- 이벤트
 insert into EVENT values('PRO-001', 'CANDY', (select REMPER_CODE from member where id='CANDY'), 'JINNY'); 

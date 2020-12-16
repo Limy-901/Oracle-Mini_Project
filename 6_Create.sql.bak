@@ -110,43 +110,10 @@ create table MANAGE(
 	MONTH_SALES number(20) -- 매출기록
 );
 
--- 이벤트
+-- 이벤트 트리거 사용하기 
 create table EVENT(
 	DCT_CODE varchar2(10),    -- 할인코드
 	DCT_FRND varchar2(10),    -- 초대한사람
 	REMPER_CODE varchar2(10), -- 추천인코드
 	ID varchar2(15)           -- 신규회원아이디
 );
-
--- 멤버 insert시 셋팅값 디폴트값으로 설정해주는 트리거
-create or replace trigger TRI_MKSET
-after
-	insert on MEMBER
-	for each row
-begin
-	insert into SETTING
-	values(:new.ID,'HD','0','KOREAN','DATA','0');
-end;
-/
-
--- 멤버 insert시 멤버관리 디폴트값으로 설정해주는 트리거
-create or replace trigger TRI_MKMEMMGR
-after
-	insert on MEMBER
-	for each row
-begin
-	insert into MEMMGR
-	values(:new.ID,'0','0');
-end;
-/
-
--- 작품 insert시 신작추천 자동생성 트리거
-create or replace trigger TRI_NEWVID
-after
-	insert on VID
-	for each row
-begin
-	insert into NOTICE(NEW_RECOM)
-	values(:new.V_NAME||'이 새로 나왔습니다.');
-end;
-/
