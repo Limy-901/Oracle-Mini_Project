@@ -90,7 +90,7 @@ alter table STREAMING add constraint STREAMING_PK primary key(V_CODE,ID);
 -- 알림소식
 create table NOTICE(
 	NEW_NOTICE varchar2(30),                                        -- 공지사항
-	NEW_RECOM varchar2(30),                                         -- 신작추천
+	NEW_RECOM varchar2(100),                                         -- 신작추천
 	NEW_EVENT varchar2(30)                                          -- 이벤트
 );
 -- 질문게시판 시퀀스
