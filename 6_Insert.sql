@@ -21,10 +21,10 @@ insert into VID values(vid_SEQ.nextval,'그 시절 우리가 좋아했던 소녀
 insert into VID values(vid_SEQ.nextval,'월-E','앤드류 스탠튼','미국','월-E','2008/08/06',10,51);
 
 -- 회원
-INSERT INTO MEMBER VALUES('JINNY','wda123','SNID@NAVER.COM','1999.01.01','2020.02.15','RE-01');
-INSERT INTO MEMBER VALUES('CANDY','gf2123','HO@NAVER.COM','2000.01.02','2020.03.15','RE-02');
-INSERT INTO MEMBER VALUES('JUN','ge9293','DO@NAVER.COM','2001.01.03','2018.03.15','RE-03');
-INSERT INTO MEMBER VALUES('JONNY','jonny3','RO@NAVER.COM','2002.01.04','2015.01.30','RE-04');
+insert into  MEMBER values('JINNY','wda123','SNID@NAVER.COM','1999.01.01','2020.02.15','RE-01');
+insert into MEMBER values('CANDY','gf2123','HO@NAVER.COM','2000.01.02','2020.03.15','RE-02');
+insert into MEMBER values('JUN','ge9293','DO@NAVER.COM','2001.01.03','2018.03.15','RE-03');
+insert into MEMBER values('JONNY','jonny3','RO@NAVER.COM','2002.01.04','2015.01.30','RE-04');
 
 -- 결제
 insert into pay values('JINNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
