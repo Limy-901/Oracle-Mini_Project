@@ -36,3 +36,6 @@ SELECT S.V_CODE"작품코드",M.ID"아이디" ,V_DATE"시청일자",V_CONTINUE"�
 
 --리뷰
 SELECT R.V_CODE"작품코드",R.V_REVIEW"리뷰내용",R.V_GRADE"평점",M.ID"아이디" FROM REVIEW R, MEMBER M WHERE R.ID=M.ID;
+
+--알림
+SELECT NEW_NOTICE"공지사항",NEW_RECOM"새로운 작품 추천",NEW_EVENT"이벤트참여소식" FROM NOTICE;
