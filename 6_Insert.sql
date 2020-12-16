@@ -27,22 +27,22 @@ insert into MEMBER values('JUN','ge9293','DO@NAVER.COM','2001.01.03','2018.03.15
 insert into MEMBER values('JONNY','jonny3','RO@NAVER.COM','2002.01.04','2015.01.30','RE-04');
 
 -- 결제
-insert into pay values('JINNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
-insert into pay values('CANDY',2,(select PAYDAY from member where id='CANDY'),ADD_MONTHS((select PAYDAY from member where id='CANDY'),2));
-insert into pay values('JUN',3,(select PAYDAY from member where id='JUN'),ADD_MONTHS((select PAYDAY from member where id='JUN'),3));
-insert into pay values('JONNY',1,(select PAYDAY from member where id='JONNY'),ADD_MONTHS((select PAYDAY from member where id='JONNY'),1));
+insert into PAY values('JINNY',1,(select PAYDAY from member where id='JINNY'),ADD_MONTHS((select PAYDAY from member where id='JINNY'),1));
+insert into PAY values('CANDY',2,(select PAYDAY from member where id='CANDY'),ADD_MONTHS((select PAYDAY from member where id='CANDY'),2));
+insert into PAY values('JUN',3,(select PAYDAY from member where id='JUN'),ADD_MONTHS((select PAYDAY from member where id='JUN'),3));
+insert into PAY values('JONNY',1,(select PAYDAY from member where id='JONNY'),ADD_MONTHS((select PAYDAY from member where id='JONNY'),1));
 
 -- 셋팅
-insert into setting values('JINNY','fullhd','0','ENGLISH','wifi',1);
-insert into setting values('CANDY','hd','1','KOREAN','4G',0);
-insert into setting values('JUN','hd','1','KOREAN','4G',0);
-insert into setting values('JONNY','fullhd','0','ENGLISH','wifi',1);
+insert into SETTING values('JINNY','fullhd','0','ENGLISH','wifi',1);
+insert into SETTING values('CANDY','hd','1','KOREAN','4G',0);
+insert into SETTING values('JUN','hd','1','KOREAN','4G',0);
+insert into SETTING values('JONNY','fullhd','0','ENGLISH','wifi',1);
 
 -- 회원관리
-insert into memmgr values('JINNY',0,1);
-insert into memmgr values('CANDY',1,1);
-insert into memmgr values('JUN',1,0);
-insert into memmgr values('JONNY',0,1);
+insert into MEMMGR values('JINNY',0,1);
+insert into MEMMGR values('CANDY',1,1);
+insert into MEMMGR values('JUN',1,0);
+insert into MEMMGR values('JONNY',0,1);
 
 -- 마이페이지
 insert into MYPAGE values ('JINNY', '무간도', (select V_CODE from STREAMING where ID='JINNY'), 'MOVIE-00175', '0', '어바웃 타임', 'A');
